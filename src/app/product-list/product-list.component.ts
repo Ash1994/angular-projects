@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { ConfigService } from '../product-list/config.service';
+import { Component, OnInit } from '@angular/core';
 
 import { products } from '../products';
 
@@ -7,8 +8,17 @@ import { products } from '../products';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
   products = products;
+
+  constructor(private configService: ConfigService) { }
+
+  ngOnInit() {
+    this.configService.setUserID(1);
+    this.configService.getUser().subscribe((response)=>{
+      console.log(response);
+    });
+  }
 
   share() {
     window.alert('The product has been shared!');

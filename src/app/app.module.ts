@@ -7,10 +7,16 @@ import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { ProductListComponent } from './product-list/product-list.component';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './product-list/TokenInterceptor';
+import { AgGridModule } from 'ag-grid-angular';
+
 @NgModule({
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    AgGridModule.withComponents([]),
     RouterModule.forRoot([
       { path: '', component: ProductListComponent },
     ])
@@ -20,7 +26,11 @@ import { ProductListComponent } from './product-list/product-list.component';
     TopBarComponent,
     ProductListComponent
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  providers: [ 
+    HttpClientModule, 
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, 
+  ]
 })
 export class AppModule { }
 

@@ -1,0 +1,6 @@
+{
+    "/user/getById/": {
+      "target": "http://localhost:9091/api/",
+      "secure": false
+    }
+  }

@@ -7,7 +7,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 export class TokenInterceptor implements HttpInterceptor {
   
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const userToken = '3d0ff0cf-336b-4b30-ae3b-78a572fed78c';
+    const userToken = '849308c9-a600-440b-bc4d-29ade3852d47';
     const modifiedReq = req.clone({ 
         headers: req.headers.set('Authorization', `Bearer ${userToken}`),
       });

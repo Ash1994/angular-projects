@@ -2,6 +2,7 @@ import { ConfigService } from '../product-list/config.service';
 import { Component, OnInit } from '@angular/core';
 
 import { products } from '../products';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-list',
@@ -10,14 +11,24 @@ import { products } from '../products';
 })
 export class ProductListComponent implements OnInit {
   products = products;
+  imageSource;
 
-  constructor(private configService: ConfigService) { }
+  constructor(private configService: ConfigService, private sanitizer:DomSanitizer) { }
+
+  transform(){
+    return this.imageSource ? this.sanitizer.bypassSecurityTrustResourceUrl(this.imageSource) : '';
+  }
 
   ngOnInit() {
-    this.configService.setUserID(1);
-    this.configService.getUser().subscribe((response)=>{
-      console.log(response);
-    });
+    this.configService.getGallery().subscribe((response) => {
+      if (response) {
+        console.log(response);
+        console.log(response.image);
+        this.imageSource = 'data:image/png;base64,' +response.image.data;
+        // this.imageSource = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+        //          + imageSource.base64string);
+      }
+    }); 
   }
 
   share() {

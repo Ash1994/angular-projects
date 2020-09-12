@@ -1,0 +1,13 @@
+{
+    "/api/": {
+      "target": "http://catering-business-clone.herokuapp.com/",
+      "secure": false,
+      "changeOrigin": true,
+        "headers": {
+               "Connection": "keep-alive"
+        },
+      "pathRewrite": {
+        "^/catering": ""
+      }
+    }
+  }

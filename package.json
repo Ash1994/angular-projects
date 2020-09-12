@@ -1,6 +1,18 @@
 {
-  "name": "jddxrqjkvxj.angular",
+  "name": "catering-presentation",
   "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --proxy-config src/proxy.json",
+    "build": "ng build",
+    "build-platform": "ng build --configuration=platform",
+    "test": "ng test",
+    "test-headless": "ng test --browsers=ChromeHeadlessCI",
+    "test-ci-tuning": "ng test --karmaConfig=./karma-ci.conf.js --configuration=tuning --watch=false",
+    "test-ci": "ng test --karmaConfig=./karma-ci.conf.js --codeCoverage=true --watch=false",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "9.1.9",
@@ -8,6 +20,8 @@
     "@angular/compiler": "9.1.9",
     "@angular/core": "9.1.9",
     "@angular/forms": "9.1.9",
+    "@angular/material": "^9.2.4",
+    "@angular/material-moment-adapter": "^9.2.4",
     "@angular/platform-browser": "9.1.9",
     "@angular/platform-browser-dynamic": "9.1.9",
     "@angular/router": "9.1.9",
@@ -20,15 +34,8 @@
     "jquery": "^3.5.1",
     "rxjs": "6.5.5",
     "tslib": "1.13.0",
-    "zone.js": "0.10.3"
-  },
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "zone.js": "0.10.3",
+    "remixicon": "^2.5.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.1",

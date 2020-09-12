@@ -1,42 +1,37 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { AppComponent } from './app.component';
-import { TopBarComponent } from './top-bar/top-bar.component';
-import { ProductListComponent } from './product-list/product-list.component';
-
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './product-list/TokenInterceptor';
 import { AgGridModule } from 'ag-grid-angular';
+import { AppRoutingModule } from './app-routing.module';
+import { LandingPageModule } from './landing-page/landing-page.module';
+import { HeaderInterceptor } from './header-interceptor.service';
+import { AdminLandingPageComponent } from './admin-landing-page/admin-landing-page.component';
 
 @NgModule({
   imports: [
     BrowserModule,
+    AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AgGridModule.withComponents([]),
-    RouterModule.forRoot([
-      { path: '', component: ProductListComponent },
-    ])
+    LandingPageModule,
+    AgGridModule.withComponents([])
   ],
   declarations: [
     AppComponent,
-    TopBarComponent,
-    ProductListComponent
+    AdminLandingPageComponent
   ],
   bootstrap: [ AppComponent ],
-  providers: [ 
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderInterceptor,
+      multi: true
+    },
     HttpClientModule, 
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, 
   ]
 })
 export class AppModule { }
-
-
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/
